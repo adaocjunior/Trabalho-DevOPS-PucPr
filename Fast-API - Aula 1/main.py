@@ -8,11 +8,19 @@ TAREFAS = []
 class Tarefa(BaseModel):
         id: int
         titulo: str
-        data_criacao: datetime
+        dataCriacao: datetime
         finalizado: bool = False
 
+async def criarTarefa (titulo: str):
+        id = len(TAREFAS)
+        tarefaNova = Tarefa(id=id, titulo=titulo, dataCriacao=datetime.now(), finalizado=False)
+
+        TAREFAS.append(tarefaNova)
+
+        return {"mensagem": "OK"}
+
 async def listarTarefas():
-        tarefa_nova = Tarefa(id=0, titulo="Tarefa de teste", data_criacao=datetime.now(), finalizado=False)
-        return tarefa_nova
+        return TAREFAS
 
 API.add_api_route("/tarefas", listarTarefas, methods=['GET'])
+API.add_api_route("/criar", criarTarefa, methods=['POST'])
