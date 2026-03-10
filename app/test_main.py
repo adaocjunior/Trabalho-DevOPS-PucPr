@@ -4,8 +4,17 @@ from fastapi.testclient import TestClient
 
 CLIENT = TestClient(API)
 
-def testarEndpoint():
+def testarEndpointListarTarefas():
     requisicao = CLIENT.get("/tarefas")
 
     assert requisicao.status_code == 200
+
+def testarEndpointCriarTarefas():
+    requisicao = CLIENT.post("/criar", params={'titulo': 'Teste Criar Tarefa'})
     
+    assert requisicao.json() == {"mensagem": "OK"}
+    
+    requisicao = CLIENT.get("/tarefas")
+
+    assert len(requisicao.json()) == 1
+    assert requisicao.json()[0]['id'] == 0
