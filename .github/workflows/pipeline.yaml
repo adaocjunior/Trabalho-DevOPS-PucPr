@@ -1,0 +1,22 @@
+name: Integracao
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  testesUnitarios:
+    name: "Integracao"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Instalacao de dependencias
+        run: pip install -r requirements.txt
+
+      - name: Testes unitarios
+        run: pytest
