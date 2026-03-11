@@ -21,6 +21,12 @@ def testarEndpointCriarTarefas():
 
 def testarPaginaInicial():
     requisicao = CLIENT.get("/")
-    
+
     assert requisicao.status_code == 200
     assert requisicao.json() == {"mensagem":"Funcionando!"}
+
+def validarAutor():
+    requisicao = CLIENT.get("/autor")
+
+    assert requisicao.status_code == 200
+    assert requisicao.json() == {"Autor":"Adao Correa da Costa Junior"}   

@@ -22,9 +22,15 @@ async def criarTarefa (titulo: str):
 async def paginaInicial():
         return{"mensagem": "Funcionando!"}
 
+async def mostrarAutor():
+        return{"Autor":"Adao Correa da Costa Junior"}
+
 async def listarTarefas():
         return TAREFAS
+
+
 
 API.add_api_route("/tarefas", listarTarefas, methods=['GET'])
 API.add_api_route("/criar", criarTarefa, methods=['POST'])
 API.add_api_route("/", paginaInicial, methods=['GET'])
+API.add_api_route("/autor", mostrarAutor, methods=['GET'])
