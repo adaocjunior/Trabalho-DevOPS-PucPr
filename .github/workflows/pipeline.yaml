@@ -38,3 +38,12 @@ jobs:
         with:
           push: true
           tags: adaoojunior/devops2026-tarefas:latest
+  analise-estatica:
+    name: "Bandit"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Instalando bandit
+        run: pip install bandit
+      - name: Analise estatica
+        run: bandit -r .
